@@ -23,9 +23,9 @@ async function askWithFallback(question: string): Promise<string> {
       if (err.code === "budget_exceeded" || err.code === "rate_limit_exceeded") {
         // Budget Firewall triggered — request blocked before reaching the LLM provider
         console.warn("Budget cap reached.");
-        console.warn("  status:    ", err.status);     // 429
-        console.warn("  code:      ", err.code);       // "budget_exceeded"
-        console.warn("  requestId: ", err.requestId);  // for support / audit trail
+        console.warn("  status:    ", err.status); // 429
+        console.warn("  code:      ", err.code); // "budget_exceeded"
+        console.warn("  requestId: ", err.requestId); // for support / audit trail
 
         // Graceful fallback — return a safe default instead of crashing
         return "Service temporarily unavailable. Please try again later.";

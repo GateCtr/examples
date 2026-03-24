@@ -13,7 +13,11 @@ const response = await client.chat({
     // First user turn
     { role: "user", content: "What is GateCtr?" },
     // Assistant turn (simulated prior response in a multi-turn flow)
-    { role: "assistant", content: "GateCtr is an LLM middleware gateway that optimizes, routes, and enforces budgets on your AI requests." },
+    {
+      role: "assistant",
+      content:
+        "GateCtr is an LLM middleware gateway that optimizes, routes, and enforces budgets on your AI requests.",
+    },
     // Second user turn
     { role: "user", content: "What is the main benefit?" },
   ],

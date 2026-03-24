@@ -13,7 +13,7 @@ const r1 = await client.complete({
   messages: [{ role: "user", content: "Say hi." }],
   gatectr: {
     optimize: false, // disable Context Optimizer for this request only
-    route: false,    // keep routing off (same as client default)
+    route: false, // keep routing off (same as client default)
   },
 });
 console.log("Request 1 (optimize: false) — tokensSaved:", r1.gatectr.tokensSaved); // 0
@@ -22,10 +22,12 @@ console.log("Request 1 (optimize: false) — tokensSaved:", r1.gatectr.tokensSav
 // Use case: this is a complex prompt where you want GateCtr to pick the best model.
 const r2 = await client.complete({
   model: "gpt-4o",
-  messages: [{ role: "user", content: "Summarize the history of the Roman Empire in 3 sentences." }],
+  messages: [
+    { role: "user", content: "Summarize the history of the Roman Empire in 3 sentences." },
+  ],
   gatectr: {
-    optimize: true,  // keep optimization on (same as client default)
-    route: true,     // enable Model Router for this request — GateCtr picks the optimal model
+    optimize: true, // keep optimization on (same as client default)
+    route: true, // enable Model Router for this request — GateCtr picks the optimal model
     // budgetId: "proj_abc123" — optionally scope this request to a specific budget
   },
 });
