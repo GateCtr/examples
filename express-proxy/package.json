@@ -1,0 +1,22 @@
+{
+  "name": "gatectr-express-proxy-example",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "start": "node --experimental-strip-types index.ts",
+    "dev": "node --experimental-strip-types --watch index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gatectr/sdk": "^0.2.0",
+    "express": "^4.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
+}

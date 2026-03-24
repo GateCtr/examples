@@ -1,0 +1,89 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  background: #0a0a0a;
+  color: #ededed;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+main {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+h1 { font-size: 1.25rem; font-weight: 600; }
+p.subtitle { color: #888; font-size: 0.85rem; }
+
+.card {
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card h2 { font-size: 0.9rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; }
+
+textarea {
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #ededed;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.row { display: flex; gap: 0.5rem; }
+
+button {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #ededed;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.15s;
+}
+button:hover { border-color: #555; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.primary { background: #00b4c8; border-color: #00b4c8; color: #000; font-weight: 600; }
+button.primary:hover { background: #00c8e0; border-color: #00c8e0; }
+
+.output {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 6px;
+  color: #ccc;
+  font-size: 0.85rem;
+  min-height: 60px;
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.meta { color: #555; font-size: 0.75rem; }
+.error { color: #f87171; }
+.badge {
+  display: inline-block;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  color: #888;
+}

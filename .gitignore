@@ -1,0 +1,33 @@
+# Dependencies (all subfolders)
+node_modules/
+.pnp
+.pnp.*
+
+# Build output
+dist/
+build/
+out/
+.next/
+
+# pnpm lockfiles are committed — but not the store
+.pnpm-store/
+
+# Env files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# TypeScript build cache
+*.tsbuildinfo
+.tsbuildinfo
+
+# Next.js cache
+.next/
+.vercel/
+
+# Misc
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-debug.log*
+.pnpm-debug.log*

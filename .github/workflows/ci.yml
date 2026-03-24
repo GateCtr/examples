@@ -1,0 +1,141 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # ── node-sdk ────────────────────────────────────────────────────────────────
+  node-sdk-lint:
+    name: node-sdk / lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: node-sdk/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: node-sdk/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm exec prettier --check .
+
+  node-sdk-typecheck:
+    name: node-sdk / typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: node-sdk/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: node-sdk/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+
+  node-sdk-validate:
+    name: node-sdk / validate files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert all 11 example files exist
+        run: |
+          for f in \
+            node-sdk/examples/01-client-setup.ts \
+            node-sdk/examples/02-complete.ts \
+            node-sdk/examples/03-chat.ts \
+            node-sdk/examples/04-streaming.ts \
+            node-sdk/examples/05-models.ts \
+            node-sdk/examples/06-usage.ts \
+            node-sdk/examples/07-error-handling.ts \
+            node-sdk/examples/08-per-request-options.ts \
+            node-sdk/examples/09-context-optimizer.ts \
+            node-sdk/examples/10-budget-firewall.ts \
+            node-sdk/examples/11-model-router.ts; do
+            test -f "$f" || (echo "Missing: $f" && exit 1)
+          done
+          echo "All 11 node-sdk example files present."
+
+  # ── nextjs-app ──────────────────────────────────────────────────────────────
+  nextjs-app-typecheck:
+    name: nextjs-app / typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nextjs-app/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: nextjs-app/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+
+  nextjs-app-build:
+    name: nextjs-app / build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nextjs-app/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: nextjs-app/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          # Dummy key — build must succeed without a real key
+          GATECTR_API_KEY: gtr_ci_dummy
+
+  # ── express-proxy ────────────────────────────────────────────────────────────
+  express-proxy-typecheck:
+    name: express-proxy / typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: express-proxy/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: express-proxy/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+
+  # ── budget-alert ─────────────────────────────────────────────────────────────
+  budget-alert-typecheck:
+    name: budget-alert / typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: budget-alert/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: budget-alert/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
