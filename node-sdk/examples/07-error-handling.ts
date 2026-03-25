@@ -31,14 +31,14 @@ try {
   if (err instanceof GateCtrApiError) {
     // Non-2xx HTTP response from the GateCtr API
     console.log("GateCtrApiError");
-    console.log("  status:    ", err.status);     // HTTP status code (e.g. 401, 429, 500)
-    console.log("  code:      ", err.code);       // machine-readable code (e.g. "unauthorized", "budget_exceeded")
-    console.log("  requestId: ", err.requestId);  // use this when contacting support
+    console.log("  status:    ", err.status); // HTTP status code (e.g. 401, 429, 500)
+    console.log("  code:      ", err.code); // machine-readable code (e.g. "unauthorized", "budget_exceeded")
+    console.log("  requestId: ", err.requestId); // use this when contacting support
     console.log("  message:   ", err.message);
   } else if (err instanceof GateCtrTimeoutError) {
     // Request exceeded the configured timeout
     console.log("GateCtrTimeoutError");
-    console.log("  timeoutMs: ", err.timeoutMs);  // the timeout value that was exceeded
+    console.log("  timeoutMs: ", err.timeoutMs); // the timeout value that was exceeded
     console.log("  message:   ", err.message);
   } else if (err instanceof GateCtrNetworkError) {
     // DNS failure, connection refused, or other transport-level error

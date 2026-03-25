@@ -31,9 +31,7 @@ console.log("  reply:    ", r1.choices[0]?.message.content);
 // Use case: you need a specific model for compliance, testing, or reproducibility.
 const r2 = await client.chat({
   model: "gpt-4o",
-  messages: [
-    { role: "user", content: "Explain quantum entanglement in simple terms." },
-  ],
+  messages: [{ role: "user", content: "Explain quantum entanglement in simple terms." }],
   max_tokens: 100,
   gatectr: {
     route: false, // disable Model Router for this request — use exactly "gpt-4o"
